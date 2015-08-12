@@ -8,7 +8,7 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Filter-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Filter" customModuleProvider="target" sceneMemberID="viewController">
@@ -86,7 +86,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="GbV-cQ-s6H"/>
+                    <navigationItem key="navigationItem" title="Filter" id="GbV-cQ-s6H"/>
                     <connections>
                         <outlet property="alertButton" destination="QfN-hi-Yye" id="2Bz-sZ-kP4"/>
                         <outlet property="imageView" destination="B3c-wd-2dG" id="bAW-le-szz"/>
@@ -100,29 +100,69 @@
         <scene sceneID="5Nb-ZS-iUi">
             <objects>
                 <tableViewController id="BML-wV-g79" customClass="PostsTableViewController" customModule="Filter" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="311" sectionHeaderHeight="22" sectionFooterHeight="22" id="A0N-I1-VtZ">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="413" sectionHeaderHeight="22" sectionFooterHeight="22" id="A0N-I1-VtZ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="311" id="osh-vz-tN5">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="413" id="osh-vz-tN5">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="osh-vz-tN5" id="ePF-Q5-bUI">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J6L-mM-HbS">
-                                            <rect key="frame" x="0.0" y="8" width="600" height="32.5"/>
-                                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                        </view>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="STM-0h-FBE">
-                                            <rect key="frame" x="191" y="43" width="240" height="128"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera" translatesAutoresizingMaskIntoConstraints="NO" id="STM-0h-FBE">
+                                            <rect key="frame" x="150" y="57" width="300" height="300"/>
+                                            <color key="backgroundColor" red="1" green="0.84457236842105265" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="300" id="Wl5-kP-bya"/>
+                                                <constraint firstAttribute="height" constant="300" id="mq9-fp-fgm"/>
+                                            </constraints>
                                         </imageView>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J6L-mM-HbS">
+                                            <rect key="frame" x="0.0" y="8" width="600" height="25"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cQ7-y3-rvZ">
+                                                    <rect key="frame" x="8" y="2" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o13-CB-V6Z">
+                                                    <rect key="frame" x="58" y="2" width="67" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstItem="cQ7-y3-rvZ" firstAttribute="top" secondItem="J6L-mM-HbS" secondAttribute="top" constant="2" id="M4U-M9-HEM"/>
+                                                <constraint firstItem="cQ7-y3-rvZ" firstAttribute="leading" secondItem="J6L-mM-HbS" secondAttribute="leading" constant="8" id="PAq-qX-1Hk"/>
+                                                <constraint firstItem="o13-CB-V6Z" firstAttribute="leading" secondItem="cQ7-y3-rvZ" secondAttribute="trailing" constant="8" id="gEg-av-iZ2"/>
+                                                <constraint firstAttribute="centerY" secondItem="cQ7-y3-rvZ" secondAttribute="centerY" id="qvV-12-tbB"/>
+                                                <constraint firstAttribute="centerY" secondItem="o13-CB-V6Z" secondAttribute="centerY" id="sN9-1N-BWK"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="M4U-M9-HEM"/>
+                                                </mask>
+                                            </variation>
+                                        </view>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="J6L-mM-HbS" firstAttribute="top" secondItem="ePF-Q5-bUI" secondAttribute="topMargin" id="Ke8-fb-3bU"/>
                                         <constraint firstItem="J6L-mM-HbS" firstAttribute="leading" secondItem="ePF-Q5-bUI" secondAttribute="leadingMargin" constant="-8" id="MzF-9o-f0Y"/>
                                         <constraint firstItem="J6L-mM-HbS" firstAttribute="top" secondItem="ePF-Q5-bUI" secondAttribute="topMargin" id="RD7-Du-7yD"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="J6L-mM-HbS" secondAttribute="trailing" constant="-8" id="Un1-iR-ETI"/>
+                                        <constraint firstAttribute="centerY" secondItem="STM-0h-FBE" secondAttribute="centerY" id="bLQ-2v-QIw"/>
+                                        <constraint firstItem="STM-0h-FBE" firstAttribute="top" secondItem="J6L-mM-HbS" secondAttribute="bottom" constant="24" id="fpu-k6-Mbg"/>
+                                        <constraint firstAttribute="centerX" secondItem="STM-0h-FBE" secondAttribute="centerX" id="lNG-1j-F65"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="RD7-Du-7yD"/>
+                                        </mask>
+                                    </variation>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
