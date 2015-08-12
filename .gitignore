@@ -1,6 +1,26 @@
+Skip to content
+This repository  
+Pull requests
+Issues
+Gist
+ @mcclure15
+ Watch 1,240
+  Star 26,760
+  Fork 9,789
+github/gitignore
+Branch: master  gitignore/Swift.gitignore
+@modocachemodocache on Jun 8 [ObjC][Swift] Ignore Xcode SCM blueprint files
+4 contributors @nwest @martinblech @modocache @bbodenmiller
+RawBlameHistory     44 lines (36 sloc)  0.837 kB
 # Xcode
 #
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+
+## Build generated
 build/
+DerivedData
+
+## Various settings
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -10,12 +30,18 @@ build/
 *.perspectivev3
 !default.perspectivev3
 xcuserdata
+
+## Other
 *.xccheckout
 *.moved-aside
-DerivedData
+*.xcuserstate
+*.xcscmblueprint
+
+## Obj-C/Swift specific
 *.hmap
 *.ipa
-*.xcuserstate
+.DS_Store
+**/Keys.swift
 
 # CocoaPods
 #
@@ -31,3 +57,5 @@ DerivedData
 # Carthage/Checkouts
 
 Carthage/Build
+Status API Training Shop Blog About Help
+© 2015 GitHub, Inc. Terms Privacy Security Contact
