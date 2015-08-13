@@ -7,11 +7,41 @@
 //
 
 import UIKit
+import Parse
 
 class PostsTableViewController: UITableViewController {
+  
+ var posts = [Post]()
+  
+  
 
     override func viewDidLoad() {
         super.viewDidLoad()
+      
+      let query = PFQuery(className: "Post")
+      
+      query.findObjectsInBackgroundWithBlock { (results, error) -> Void in
+        if let error = error {
+          println(error.localizedDescription)
+        } else if let posts = results as? [PFObject] {
+          println(posts.count)
+          for post in posts {
+            if let imageFile = post["image"] as? PFFile {
+              imageFile.getDataInBackgroundWithBlock({ (data, error) -> Void in
+                if let error = error {
+                  println(error.localizedDescription)
+                } else if let data = data,
+                  image = UIImage(data: data){
+                    NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                      let post = Post(image: image)
+//                      posts.append(post)
+                    })
+                }
+              })
+            }
+          }
+        }
+
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -20,23 +50,20 @@ class PostsTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+  
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
-        return 0
+        return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        return 0
+        return 1
     }
 
     /*
@@ -94,4 +121,5 @@ class PostsTableViewController: UITableViewController {
     }
     */
 
+}
 }

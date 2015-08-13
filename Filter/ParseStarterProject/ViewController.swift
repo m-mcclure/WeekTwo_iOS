@@ -9,9 +9,16 @@ import Parse
 
 class ViewController: UIViewController {
   
+
+  @IBOutlet weak var equalWidthsConstrait80Percent: NSLayoutConstraint!
+  
+  @IBOutlet weak var collectionViewVerticalSpace: NSLayoutConstraint!
+  
+  @IBOutlet weak var yConstraintForImageView: NSLayoutConstraint!
+  
   @IBOutlet weak var imageView: UIImageView!
   @IBOutlet weak var alertButton: UIButton!
-  @IBAction func buttonPreseed(sender: UIButton) {
+  @IBAction func buttonPressed(sender: UIButton) {
     alert.modalPresentationStyle = UIModalPresentationStyle.Popover
     
     if let popover = alert.popoverPresentationController {
@@ -19,11 +26,29 @@ class ViewController: UIViewController {
       popover.sourceRect = alertButton.frame
     }
     self.presentViewController(alert, animated: true, completion: nil)
+    
+    
+  }
+  
+  func enterFilterMode() {
+    collectionViewVerticalSpace.constant = 16
+   yConstraintForImageView.constant = 74
+    
+    UIView.animateWithDuration(0.3, animations: { () -> Void in
+      self.view.layoutIfNeeded()
+    })
+    
+    let doneButton = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Done, target: self, action: "closeFilterMode")
+    navigationItem.rightBarButtonItem = doneButton
+  }
+  
+  func closeFilterMode() {
+    println("closing")
   }
   
   let picker: UIImagePickerController = UIImagePickerController()
   
-  let alert = UIAlertController(title: "Button Clicked", message: "Yes the button was clicked", preferredStyle: UIAlertControllerStyle.ActionSheet)
+  let alert = UIAlertController(title: "Choose an Action", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -108,6 +133,15 @@ class ViewController: UIViewController {
       self.imageView.image = finalImage
     }
     
+    if UIDevice.currentDevice().userInterfaceIdiom == .Phone {
+      
+      let filterAction = UIAlertAction(title: "Filter", style: UIAlertActionStyle.Default) { (alert) -> Void in
+        self.enterFilterMode()
+      }
+      
+      alert.addAction(filterAction)
+    }
+    
     let uploadAction = UIAlertAction(title: "Upload", style: UIAlertActionStyle.Default) { (alert) -> Void in
       let post = PFObject(className: "Post")
       post["text"] = "test post wednesday"
@@ -125,9 +159,9 @@ class ViewController: UIViewController {
     alert.addAction(uploadAction)
     alert.addAction(cancelAction)
     alert.addAction(chooseOrTakePhotoAction)
-    alert.addAction(sepia)
-    alert.addAction(noir)
-    alert.addAction(bluePeriod)
+//    alert.addAction(sepia)
+//    alert.addAction(noir)
+//    alert.addAction(bluePeriod)
 
     self.picker.delegate = self
     self.picker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
