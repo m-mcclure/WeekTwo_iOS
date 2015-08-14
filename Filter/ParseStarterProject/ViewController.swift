@@ -33,6 +33,15 @@ class ViewController: UIViewController {
     
   }
   
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    if segue.identifier == "ShowGallery" {
+      if let galleryViewController = segue.destinationViewController as? GalleryViewController {
+        galleryViewController.delegate = self
+        galleryViewController.desiredFinalImageSize = imageView.frame.size
+      }
+    }
+  }
+  
   func enterFilterMode() {
     collectionViewVerticalSpace.constant = 16
    yConstraintForImageView.constant = 74
@@ -63,6 +72,7 @@ class ViewController: UIViewController {
       imageView.image = displayImage
       thumbnail = ImageResizer.resizeImage(displayImage, size:kThumbnailSize)
       collectionView.reloadData()
+      println("did set displayImage")
     }
   }
   
@@ -71,6 +81,7 @@ class ViewController: UIViewController {
     super.viewDidLoad()
     
     collectionView.dataSource = self
+    collectionView.delegate = self
 //    var sectionInset = UIEdgeInsets(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
     
     let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { (alert) -> Void in
@@ -78,7 +89,7 @@ class ViewController: UIViewController {
     }
     
     let choosePhotoAction = UIAlertAction(title: "Choose a Photo", style: UIAlertActionStyle.Default) { (alert) -> Void in
-      self.presentViewController(self.picker, animated: true, completion: nil)
+      self.performSegueWithIdentifier("ShowGallery", sender: self)
     }
     
     let takeAPhotoAction = UIAlertAction(title: "Take a Photo", style: UIAlertActionStyle.Default) {
@@ -102,7 +113,7 @@ class ViewController: UIViewController {
     
     let uploadAction = UIAlertAction(title: "Upload", style: UIAlertActionStyle.Default) { (alert) -> Void in
       let post = PFObject(className: "Post")
-      post["text"] = "test post wednesday"
+      post["text"] = "friday"
       if let image = self.imageView.image,
         data = UIImageJPEGRepresentation(image, 1.0)
       {
@@ -143,8 +154,7 @@ class ViewController: UIViewController {
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   
   func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
-    let image: UIImage = (info[UIImagePickerControllerOriginalImage] as? UIImage)!
-    println("point four")
+    let image: UIImage = (info[UIImagePickerControllerEditedImage] as? UIImage)!
     displayImage = image 
     self.imageView.image = image
     self.picker.dismissViewControllerAnimated(true, completion: nil)
@@ -162,7 +172,6 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
 //MARK: UICollectionViewDataSource
 extension ViewController : UICollectionViewDataSource {
   
-  
   func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return filters.count
   }
@@ -176,19 +185,26 @@ extension ViewController : UICollectionViewDataSource {
     
     return cell
   }
-
-
-  
 }
 
 //MARK: UICollectionViewDelegate
 extension ViewController : UICollectionViewDelegate {
   func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
     
-    var cell : UICollectionViewCell = collectionView.cellForItemAtIndexPath(indexPath)!
-    cell.backgroundColor = UIColor.magentaColor()
+    let selectedFilter = filters[indexPath.row]
+
+    let newDisplayImage = selectedFilter(displayImage, context)
+    self.imageView.image = newDisplayImage
+
   }
-  
+}
+
+//MARK: ImageSelectedDelegate
+extension ViewController : ImageSelectedDelegate {
+  func controllerDidSelectImage(newImage: UIImage) {
+    println(newImage)
+    displayImage = newImage
+  }
 }
 
 
