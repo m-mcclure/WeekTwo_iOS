@@ -83,13 +83,13 @@ class ViewController: UIViewController {
     
     let takeAPhotoAction = UIAlertAction(title: "Take a Photo", style: UIAlertActionStyle.Default) {
       (alert) -> Void in
-      let imagePickerController = UIImagePickerController()
-      imagePickerController.delegate = self
-      imagePickerController.sourceType = .Camera
-      imagePickerController.allowsEditing = true
-      
+      println("point zero")
+      self.picker.sourceType = .Camera
+      self.picker.allowsEditing = true
+      println("point one")
       if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
-        self.presentViewController(imagePickerController, animated: true, completion: nil)
+        self.presentViewController(self.picker, animated: true, completion: nil)
+        println("point two")
       }
     }
     
@@ -144,9 +144,11 @@ extension ViewController: UIImagePickerControllerDelegate, UINavigationControlle
   
   func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
     let image: UIImage = (info[UIImagePickerControllerOriginalImage] as? UIImage)!
+    println("point four")
     displayImage = image 
     self.imageView.image = image
     self.picker.dismissViewControllerAnimated(true, completion: nil)
+    
   }
   
   func imagePickerControllerDidCancel(picker: UIImagePickerController) {
