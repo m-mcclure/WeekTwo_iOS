@@ -38,25 +38,64 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Fyj-hO-f7a">
-                                <rect key="frame" x="0.0" y="581" width="600" height="100"/>
+                                <rect key="frame" x="0.0" y="385" width="600" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="eLP-W3-y26"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="xDn-Ff-XwK">
-                                    <size key="itemSize" width="50" height="50"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="xDn-Ff-XwK">
+                                    <size key="itemSize" width="100" height="100"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FilterCell" id="4J5-F2-vg5">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ThumbnailCell" id="4J5-F2-vg5" customClass="ThumbnailCell" customModule="Filter" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="p2u-6e-ZHo">
+                                                    <rect key="frame" x="8" y="8" width="84" height="84"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="p2u-6e-ZHo" secondAttribute="height" multiplier="1:1" id="acW-JE-dCu"/>
+                                                    </constraints>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="acW-JE-dCu"/>
+                                                        </mask>
+                                                    </variation>
+                                                </imageView>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="p2u-6e-ZHo" firstAttribute="leading" secondItem="4J5-F2-vg5" secondAttribute="leadingMargin" id="395-6U-OgY"/>
+                                            <constraint firstItem="p2u-6e-ZHo" firstAttribute="top" secondItem="4J5-F2-vg5" secondAttribute="topMargin" id="5SN-kY-bmX"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="p2u-6e-ZHo" secondAttribute="bottom" id="E4M-ok-UZX"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="p2u-6e-ZHo" secondAttribute="bottom" id="MGT-Mo-yov"/>
+                                            <constraint firstItem="p2u-6e-ZHo" firstAttribute="top" secondItem="4J5-F2-vg5" secondAttribute="topMargin" id="OxM-hG-34W"/>
+                                            <constraint firstAttribute="centerX" secondItem="p2u-6e-ZHo" secondAttribute="centerX" id="Zr1-1c-93F"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="p2u-6e-ZHo" secondAttribute="trailing" id="lpk-k2-QgF"/>
+                                            <constraint firstItem="p2u-6e-ZHo" firstAttribute="trailing" secondItem="4J5-F2-vg5" secondAttribute="trailingMargin" id="pb4-gf-EdO"/>
+                                            <constraint firstItem="p2u-6e-ZHo" firstAttribute="top" secondItem="4J5-F2-vg5" secondAttribute="topMargin" id="tVm-Ip-qie"/>
+                                            <constraint firstItem="p2u-6e-ZHo" firstAttribute="leading" secondItem="4J5-F2-vg5" secondAttribute="leadingMargin" id="wIh-u6-TK0"/>
+                                        </constraints>
+                                        <size key="customSize" width="100" height="100"/>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="395-6U-OgY"/>
+                                                <exclude reference="5SN-kY-bmX"/>
+                                                <exclude reference="E4M-ok-UZX"/>
+                                                <exclude reference="OxM-hG-34W"/>
+                                                <exclude reference="Zr1-1c-93F"/>
+                                                <exclude reference="lpk-k2-QgF"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <outlet property="imageView" destination="p2u-6e-ZHo" id="flK-Ip-NQl"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -64,7 +103,8 @@
                         <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="Fyj-hO-f7a" secondAttribute="trailing" constant="-16" id="GA2-SI-K3Y"/>
-                            <constraint firstItem="QfN-hi-Yye" firstAttribute="top" secondItem="Fyj-hO-f7a" secondAttribute="bottom" constant="-180" id="Mgt-me-rIU">
+                            <constraint firstItem="QfN-hi-Yye" firstAttribute="top" secondItem="Fyj-hO-f7a" secondAttribute="bottom" constant="16" id="Mgt-me-rIU">
+                                <variation key="heightClass=regular-widthClass=compact" constant="-180"/>
                                 <variation key="heightClass=regular-widthClass=regular" constant="16"/>
                             </constraint>
                             <constraint firstAttribute="centerX" secondItem="QfN-hi-Yye" secondAttribute="centerX" id="Tlr-O1-6e7"/>
@@ -81,6 +121,7 @@
                     <navigationItem key="navigationItem" title="Filter" id="GbV-cQ-s6H"/>
                     <connections>
                         <outlet property="alertButton" destination="QfN-hi-Yye" id="2Bz-sZ-kP4"/>
+                        <outlet property="collectionView" destination="Fyj-hO-f7a" id="Jwl-xE-2IZ"/>
                         <outlet property="collectionViewVerticalSpace" destination="Mgt-me-rIU" id="GPp-3m-XJy"/>
                         <outlet property="equalWidthsConstrait80Percent" destination="x5J-i5-W3O" id="LTm-6e-NJd"/>
                         <outlet property="imageView" destination="B3c-wd-2dG" id="bAW-le-szz"/>
