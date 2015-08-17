@@ -30,6 +30,27 @@ class FilterService {
     filter.setValue(image, forKey: kCIInputImageKey)
     return filteredImageFromFilter(filter, context: context)
   }
+  
+  class func processFromOriginalImage(original : UIImage, context : CIContext) -> UIImage! {
+    let image = CIImage(image: original)
+    let filter = CIFilter(name: "CIPhotoEffectProcess")
+    filter.setValue(image, forKey: kCIInputImageKey)
+    return filteredImageFromFilter(filter, context: context)
+  }
+  
+  class func fadeFromOriginalImage(original : UIImage, context : CIContext) -> UIImage! {
+    let image = CIImage(image: original)
+    let filter = CIFilter(name: "CIPhotoEffectFade")
+    filter.setValue(image, forKey: kCIInputImageKey)
+    return filteredImageFromFilter(filter, context: context)
+  }
+  
+  class func maxComponentFromOriginalImage(original : UIImage, context : CIContext) -> UIImage! {
+    let image = CIImage(image: original)
+    let filter = CIFilter(name: "CIMaximumComponent")
+    filter.setValue(image, forKey: kCIInputImageKey)
+    return filteredImageFromFilter(filter, context: context)
+  }
 
   private class func filteredImageFromFilter(filter : CIFilter, context : CIContext) -> UIImage {
     let outputImage = filter.outputImage

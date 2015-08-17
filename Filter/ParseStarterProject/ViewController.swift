@@ -55,12 +55,18 @@ class ViewController: UIViewController {
   }
   
   func closeFilterMode() {
-    println("closing")
+    collectionViewVerticalSpace.constant = -180
+    yConstraintForImageView.constant = 0
+    
+    UIView.animateWithDuration(0.3, animations: { () -> Void in
+      self.view.layoutIfNeeded()
+    })
+    navigationItem.rightBarButtonItem = nil
   }
   
   let picker: UIImagePickerController = UIImagePickerController()
   
-  var filters : [(UIImage, CIContext) -> (UIImage!)] = [FilterService.sepiaFromOriginalImage, FilterService.noirFromOriginalImage, FilterService.chromeFromOriginalImage, FilterService.noirFromOriginalImage, FilterService.chromeFromOriginalImage, FilterService.noirFromOriginalImage, FilterService.chromeFromOriginalImage]
+  var filters : [(UIImage, CIContext) -> (UIImage!)] = [FilterService.sepiaFromOriginalImage, FilterService.noirFromOriginalImage, FilterService.chromeFromOriginalImage, FilterService.processFromOriginalImage, FilterService.fadeFromOriginalImage, FilterService.maxComponentFromOriginalImage]
   
   let context = CIContext(options: nil)
   var thumbnail : UIImage!
@@ -114,6 +120,8 @@ class ViewController: UIViewController {
     let uploadAction = UIAlertAction(title: "Upload", style: UIAlertActionStyle.Default) { (alert) -> Void in
       let post = PFObject(className: "Post")
       post["text"] = "friday"
+      println("image to upload: \(self.imageView.image?.description)"
+      )
       if let image = self.imageView.image,
         data = UIImageJPEGRepresentation(image, 1.0)
       {

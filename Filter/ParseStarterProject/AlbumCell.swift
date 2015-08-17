@@ -12,7 +12,9 @@ class AlbumCell: UITableViewCell {
   
   @IBOutlet weak var dateLabel: UILabel!
   
+  @IBOutlet weak var albumPhoto: UIImageView!
 
+  
   override func setSelected(selected: Bool, animated: Bool) {
     super.setSelected(selected, animated: animated)
     // Configure the view for the selected state
